@@ -61,13 +61,12 @@ npm run start
 - 如果文章中文乱码：确保你的 `.mdx` 文件用 UTF-8 保存
 
 
-
 git
 git add .
 git commit -m "Update content and fonts"
 git push
 
-
 vercel --prod
 
-https://traemy-blog-nextjs2706.vercel.app
+【国外访问】：https://sheeplamb.vercel.app/
+【国内访问】：www.lab107.asia
