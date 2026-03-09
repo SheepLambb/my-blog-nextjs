@@ -1,0 +1,38 @@
+---
+title: "学习笔记：深度学习基础与 Transformer 架构"
+date: "2023-12-20"
+description: "重读《Attention Is All You Need》，理解自注意力机制的核心数学原理。"
+type: "blog"
+tags: ["人工智能", "深度学习", "Transformer"]
+---
+
+# 深度学习基础与 Transformer 架构
+
+最近为了更好地理解 LLM，我重新系统地学习了深度学习的基础知识，重点复现了 Transformer 的结构。
+
+## 核心概念：自注意力
+
+自注意力机制是 Transformer 的灵魂。它的核心公式如下：
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
+$$
+
+### 通俗理解
+
+想象你在读一个句子。当你读到某个词（Query）时，你会不自觉地回看句子中的其他词（Keys），并根据它们与当前词的相关性，来聚合这些词的信息（Values），从而更好地理解当前词的含义。
+
+## 多头注意力
+
+多头注意力机制允许模型在不同的“子空间”里学习关注点。比如一个 Head 关注语法结构，另一个 Head 关注语义指代。
+
+## 实践心得
+
+在使用 PyTorch 实现 Transformer 时，最容易出错的地方是掩码的处理。
+- **填充掩码**: 忽略输入序列中的填充部分。
+- **前瞻掩码**: 在解码器中，防止当前位置看到未来的信息。
+
+## 推荐资源
+
+1.  [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/) - Jay Alammar 的神作，图解非常清晰。
+2.  Andrej Karpathy 的 [NanoGPT](https://github.com/karpathy/nanoGPT) - 从零手写 GPT，非常适合代码级学习。

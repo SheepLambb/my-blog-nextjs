@@ -1,0 +1,35 @@
+---
+title: "项目：沉浸式 3D 数据可视化平台"
+date: "2023-11-10"
+description: "使用 Three.js 和 React Three Fiber 构建的 WebGL 可视化大屏，展示全球网络流量。"
+type: "project"
+tags: ["三维可视化", "WebGL", "React"]
+image: "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=3D%20globe%20visualization%20with%20glowing%20connection%20lines%2C%20digital%20earth%2C%20particles%2C%20space%20background%2C%20blue%20and%20gold%20colors&image_size=landscape_16_9"
+---
+
+# 沉浸式 3D 数据可视化平台
+
+为某网络安全公司开发的实时威胁监控大屏，通过 3D 地球展示全球范围内的网络攻击和防御事件。
+
+## 核心亮点
+
+- **高性能渲染**: 使用 InstancedMesh 技术，在浏览器端流畅渲染超过 10 万个动态粒子。
+- **后期处理**: 集成了 Bloom（泛光）、景深等电影级特效。
+- **交互设计**: 支持地球的缩放、旋转以及点击具体的攻击源查看详情。
+
+## 技术难点与解决方案
+
+### 1. 性能优化
+在低端显卡上，大量的透明粒子会导致严重的过度绘制问题。我们通过减少粒子面数、使用自定义着色器替代默认材质，并将非关键粒子在远处进行视锥体剔除，成功将帧率稳定在 60fps。
+
+### 2. 坐标转换
+将经纬度坐标转换为三维空间坐标，并处理地球曲率带来的连线弯曲问题。
+
+## 技术栈
+
+- React
+- React Three Fiber
+- Drei
+- GLSL 着色器
+
+![Visualization Demo](https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=close%20up%20of%20digital%20particles%20flow%2C%20abstract%20data%20stream%2C%20neon%20colors%2C%20depth%20of%20field&image_size=landscape_16_9)

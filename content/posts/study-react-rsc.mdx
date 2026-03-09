@@ -1,0 +1,45 @@
+---
+title: "学习笔记：深入理解 React 服务端组件"
+date: "2024-01-05"
+description: "RSC 是 React 的未来？本文深入探讨其工作原理、优势以及在 Next.js 中的实践。"
+type: "blog"
+tags: ["React", "Next.js", "学习"]
+---
+
+# 深入理解 React 服务端组件
+
+React Server Components 是 React 团队推出的革命性特性，它允许我们在服务器端渲染组件，而无需将相应的 JavaScript 发送到客户端。
+
+## 什么是 RSC
+
+传统的 SSR (Server-Side Rendering) 只是在服务器上生成 HTML，但为了让页面可交互，浏览器仍然需要下载并执行所有的组件 JS 代码（Hydration）。
+
+而 RSC 允许部分组件**仅**在服务器上运行。这意味着：
+1.  **零客户端包体**: 服务器组件的依赖包（如 markdown 解析库、数据库客户端）不会被打包到客户端中。
+2.  **直接访问后端资源**: 可以直接在组件里写 SQL 查询数据库。
+
+## RSC 与 SSR 对比
+
+| 特性 | SSR | RSC |
+| :--- | :--- | :--- |
+| **渲染位置** | 服务器 -> HTML | 服务器 -> 特殊 JSON 格式 |
+| **客户端 JS** | 需要下载所有组件代码 | **不需要**下载 Server Components 代码 |
+| **状态保持** | 页面刷新时重置 | 可以在不丢失 Client Component 状态的情况下重新获取 Server Component |
+
+## 个人思考
+
+RSC 极大地简化了数据获取的逻辑。以前我们需要 `useEffect` + `fetch` 或者 `getServerSideProps`，现在只需要是一个 `async` 组件即可。
+
+\`\`\`tsx
+// 以前
+export default function Page({ data }) { ... }
+export async function getServerSideProps() { ... }
+
+// 现在 (RSC)
+export default async function Page() {
+  const data = await db.query('SELECT * FROM posts');
+  return <List data={data} />;
+}
+\`\`\`
+
+这让 React 的开发体验更接近于 PHP 或 Rails，但同时保留了现代前端的交互能力。
