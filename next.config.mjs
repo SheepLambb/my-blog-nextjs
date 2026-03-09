@@ -7,6 +7,13 @@ const nextConfig = {
   output: isStatic ? 'export' : undefined,
   images: {
     unoptimized: isStatic,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "coresg-normal.trae.ai",
+        pathname: "/api/ide/v1/text_to_image",
+      },
+    ],
   },
 };
 

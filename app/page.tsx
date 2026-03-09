@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 import GlowCard from "@/app/components/GlowCard";
 
@@ -57,10 +58,12 @@ export default function Home() {
               <GlowCard className="h-full bg-black/40 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden group hover:border-[var(--c)]/50 transition-all duration-500">
                 {p.image && (
                   <div className="project-image h-48 overflow-hidden relative">
-                    <img 
-                      src={p.image} 
-                      alt={p.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    <Image
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                   </div>

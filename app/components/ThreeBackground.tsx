@@ -67,11 +67,13 @@ function WarpedGalaxy({ count = 8000, radius = 12, isDark = true }: { count?: nu
   const pointsRef = useRef<THREE.Points>(null!);
   
   // Tech Gradient: Dark Mode (Cyan -> Purple), Light Mode (Deep Blue -> Violet)
-  const colors = isDark 
-    ? { inside: "#00f3ff", outside: "#bc00dd" }
-    : { inside: "#0052D4", outside: "#65C7F7" };
+  const colors = useMemo(() => (
+    isDark 
+      ? { inside: "#00f3ff", outside: "#bc00dd" }
+      : { inside: "#0052D4", outside: "#65C7F7" }
+  ), [isDark]);
 
-  const { positions, colors: colorArr } = useMemo(() => generateGradientGalaxyPoints(count, radius, colors), [count, radius, isDark]);
+  const { positions, colors: colorArr } = useMemo(() => generateGradientGalaxyPoints(count, radius, colors), [count, radius, colors]);
 
   useFrame((state) => {
     if (!pointsRef.current) return;
@@ -102,11 +104,13 @@ function NebulaMist({ count = 4000, radius = 15, isDark = true }: { count?: numb
     const pointsRef = useRef<THREE.Points>(null!);
     
     // Mist Colors: Dark Mode (Light Blue -> Cyan), Light Mode (Slate -> Blue)
-    const colors = isDark 
-      ? { inside: "#4facfe", outside: "#00f2fe" }
-      : { inside: "#606c88", outside: "#3f4c6b" };
+    const colors = useMemo(() => (
+      isDark 
+        ? { inside: "#4facfe", outside: "#00f2fe" }
+        : { inside: "#606c88", outside: "#3f4c6b" }
+    ), [isDark]);
 
-    const { positions, colors: colorArr } = useMemo(() => generateGradientGalaxyPoints(count, radius * 1.2, colors), [count, radius, isDark]);
+    const { positions, colors: colorArr } = useMemo(() => generateGradientGalaxyPoints(count, radius * 1.2, colors), [count, radius, colors]);
   
     useFrame(() => {
       if (!pointsRef.current) return;
